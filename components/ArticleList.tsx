@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+import Grid from '@material-ui/core/Grid'
 import ArticleCard from './ArticleCard'
 
 const ArticleList = (): JSX.Element => {
@@ -20,7 +21,6 @@ const ArticleList = (): JSX.Element => {
             },
           }
         )
-        // console.log(response.data.response.docs)
         setArticles(response.data.response.docs)
       } catch (error) {
         console.error(error)
@@ -31,25 +31,25 @@ const ArticleList = (): JSX.Element => {
   }, [])
 
   return (
-    <div>
+    <Grid container justify="center" spacing={2}>
       {articles.map((item) => {
-        const imageUrl = item.multimedia.length > 0 ? item.multimedia[0].url : 'none' // TODO : place holder image
-        // console.log(item)
+        const imageUrl = item.multimedia.length > 0 ? item.multimedia[0].url : 'none' // TODO : placeholder image
 
         return (
-          <ArticleCard
-            key={item._id}
-            id={item._id}
-            imageUrl={`https://static01.nyt.com/${imageUrl}`}
-            title={item.headline.main}
-            body={item.abstract}
-            author={item.byline.original}
-            date={item.pub_date}
-            category={item.news_desk}
-          />
+          <Grid key={item._id} item>
+            <ArticleCard
+              id={item._id}
+              imageUrl={`https://static01.nyt.com/${imageUrl}`}
+              title={item.headline.main}
+              body={item.abstract}
+              author={item.byline.original}
+              date={item.pub_date}
+              category={item.news_desk}
+            />
+          </Grid>
         )
       })}
-    </div>
+    </Grid>
   )
 }
 
