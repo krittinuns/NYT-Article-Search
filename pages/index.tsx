@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Badge from '@material-ui/core/Badge'
 import MailIcon from '@material-ui/icons/Mail'
 
+import ArticleList from '../components/ArticleList'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -30,6 +32,8 @@ const Home: NextPage = () => {
             <MailIcon />
           </Badge>
         </div>
+
+        <ArticleList />
 
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
