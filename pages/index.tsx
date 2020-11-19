@@ -1,12 +1,14 @@
 import { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
 
+import SearchInput from '../components/SearchInput'
 import ArticleList from '../components/ArticleList'
 
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        <SearchInput />
         <ArticleList />
       </main>
 
