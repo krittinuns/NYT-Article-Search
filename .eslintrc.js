@@ -5,7 +5,14 @@ module.exports = {
     es6: true,
   },
   parserOptions: { ecmaVersion: 8, sourceType: 'module' },
-  ignorePatterns: ['node_modules/*', '.next/*', '.out/*', '!.prettierrc.js', '_app.tsx'],
+  ignorePatterns: [
+    'node_modules/*',
+    '.next/*',
+    '.out/*',
+    '!.prettierrc.js',
+    '_app.tsx',
+    '_document.tsx',
+  ],
   extends: ['eslint:recommended', 'prettier/@typescript-eslint', 'plugin:prettier/recommended'],
   overrides: [
     {

@@ -1,16 +1,36 @@
-import Head from 'next/head'
 import { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
 
+import { makeStyles } from '@material-ui/core/styles'
+import Badge from '@material-ui/core/Badge'
+import MailIcon from '@material-ui/icons/Mail'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}))
+
 const Home: NextPage = () => {
+  const classes = useStyles()
+
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
+        <div className={classes.root}>
+          <Badge badgeContent={4} color="primary">
+            <MailIcon />
+          </Badge>
+          <Badge badgeContent={4} color="secondary">
+            <MailIcon />
+          </Badge>
+          <Badge badgeContent={4} color="error">
+            <MailIcon />
+          </Badge>
+        </div>
+
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
