@@ -6,6 +6,7 @@ import { searchState } from '../store'
 import Grid from '@material-ui/core/Grid'
 import ArticleCard from './ArticleCard'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Typography from '@material-ui/core/Typography'
 
 const ArticleList = (): JSX.Element => {
   const [articles, setArticles] = useState([])
@@ -40,6 +41,14 @@ const ArticleList = (): JSX.Element => {
 
   if (loading) {
     return <CircularProgress />
+  }
+
+  if (articles.length == 0) {
+    return (
+      <Typography variant="overline" color="textSecondary">
+        no article found
+      </Typography>
+    )
   }
 
   return (
