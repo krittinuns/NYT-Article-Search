@@ -3,12 +3,15 @@ import axios from 'axios'
 
 import Grid from '@material-ui/core/Grid'
 import ArticleCard from './ArticleCard'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const ArticleList = (): JSX.Element => {
   const [articles, setArticles] = useState([])
+  const [loading, setIsloading] = useState(false)
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
+      setIsloading(true)
       try {
         const response = await axios.get(
           'https://api.nytimes.com/svc/search/v2/articlesearch.json',
@@ -22,13 +25,19 @@ const ArticleList = (): JSX.Element => {
           }
         )
         setArticles(response.data.response.docs)
+        setIsloading(false)
       } catch (error) {
-        console.error(error)
+        console.error(error) // TODO : alert UI
+        setIsloading(false)
       }
     }
 
     fetchArticles()
   }, [])
+
+  if (loading) {
+    return <CircularProgress />
+  }
 
   return (
     <Grid container justify="center" spacing={2}>
