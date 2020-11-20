@@ -1,11 +1,16 @@
+import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { searchState } from '../store'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import InputBase from '@material-ui/core/InputBase'
 import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
+import ClearIcon from '@material-ui/icons/Clear'
 import SearchIcon from '@material-ui/icons/Search'
+import MenuItem from '@material-ui/core/MenuItem'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import InputAdornment from '@material-ui/core/InputAdornment'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,34 +33,75 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchInput = (): JSX.Element => {
   const [search, setSearch] = useRecoilState(searchState)
+  const [searchInputValue, setSearchInputValue] = useState('')
   const classes = useStyles()
 
-  const updateSearchingTerm = (term: string): void => {
-    if (search.term !== term) {
-      console.log(search)
-      setSearch({ ...search, term: term })
+  const clearSearch = (): void => {
+    setSearch({ term: '', sort: 'newest' })
+    setSearchInputValue('')
+  }
+
+  const submitSearch = (): void => {
+    if (search.term !== searchInputValue) {
+      setSearch({ ...search, term: searchInputValue })
+
+      // Due to limitation of the API, if query if empty string, only newest sorting would be applied
+      // Disable the sorting option for better UX
+      if (searchInputValue === '') {
+        clearSearch()
+      }
     }
+  }
+
+  const updateSearchingSort = (sort: string): void => {
+    setSearch({ ...search, sort: sort })
   }
 
   return (
     <Paper className={classes.root}>
       <InputBase
         className={classes.input}
+        value={searchInputValue}
         placeholder="Search New York Times Articles"
         inputProps={{ 'aria-label': 'search New York Times articles' }}
-        onBlur={(ev) => {
-          updateSearchingTerm(ev.target.value)
+        onChange={(ev) => {
+          setSearchInputValue(ev.target.value)
         }}
+        onBlur={submitSearch}
         onKeyPress={(ev) => {
           if (ev.key === 'Enter') {
             ev.preventDefault()
-            updateSearchingTerm((ev.target as HTMLTextAreaElement).value)
+            submitSearch()
           }
         }}
+        startAdornment={
+          <InputAdornment position="start">
+            <SearchIcon />
+          </InputAdornment>
+        }
       />
-      <SearchIcon />
-      <IconButton className={classes.iconButton} aria-label="menu">
-        <MenuIcon />
+      <FormControl
+        variant="outlined"
+        size="small"
+        style={{ minWidth: 120 }}
+        disabled={searchInputValue === ''}
+      >
+        <Select
+          value={search.sort}
+          onChange={(ev) => {
+            updateSearchingSort(ev.target.value as string)
+          }}
+        >
+          <MenuItem value="newest">Newest</MenuItem>
+          <MenuItem value="oldest">Oldest</MenuItem>
+        </Select>
+      </FormControl>
+      <IconButton
+        className={classes.iconButton}
+        onClick={clearSearch}
+        disabled={searchInputValue === ''}
+      >
+        <ClearIcon />
       </IconButton>
     </Paper>
   )

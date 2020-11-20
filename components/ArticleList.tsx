@@ -23,7 +23,7 @@ const ArticleList = (): JSX.Element => {
               page: 0,
               q: search.term,
               sort: search.sort,
-              'api-key': 'o1j8YD4Pu90wLjZHrpkGIsXj0QAACJEb',
+              'api-key': 'o1j8YD4Pu90wLjZHrpkGIsXj0QAACJEb', // TODO : get from env
             },
           }
         )
