@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useRecoilValue } from 'recoil'
+import { searchState } from '../store'
 
 import Grid from '@material-ui/core/Grid'
 import ArticleCard from './ArticleCard'
@@ -8,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 const ArticleList = (): JSX.Element => {
   const [articles, setArticles] = useState([])
   const [loading, setIsloading] = useState(false)
+  const search = useRecoilValue(searchState)
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
@@ -18,8 +21,8 @@ const ArticleList = (): JSX.Element => {
           {
             params: {
               page: 0,
-              q: 'top',
-              sort: 'newest',
+              q: search.term,
+              sort: search.sort,
               'api-key': 'o1j8YD4Pu90wLjZHrpkGIsXj0QAACJEb',
             },
           }
@@ -33,7 +36,7 @@ const ArticleList = (): JSX.Element => {
     }
 
     fetchArticles()
-  }, [])
+  }, [search])
 
   if (loading) {
     return <CircularProgress />
