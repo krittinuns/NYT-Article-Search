@@ -28,7 +28,7 @@ const ArticleList = (): JSX.Element => {
         setArticles(response.data.response.docs)
         setIsloading(false)
       } catch (error) {
-        console.error(error) // TODO : alert UI
+        console.error(error)
         setIsloading(false)
       }
     }
@@ -57,7 +57,7 @@ const ArticleList = (): JSX.Element => {
           <Grid key={item._id} item>
             <ArticleCard
               id={item._id}
-              imageUrl={`https://static01.nyt.com/${imageUrl}`}
+              imageUrl={`${process.env.NEXT_PUBLIC_NYT_IMAGE_PATH}/${imageUrl}`}
               title={item.headline.main}
               body={item.abstract}
               author={item.byline.original}
