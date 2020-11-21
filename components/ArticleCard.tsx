@@ -41,19 +41,15 @@ const ArticleCard = (info: CardInfo): JSX.Element => {
       <Card className={classes.root}>
         <CardMedia className={classes.media} image={info.imageUrl} title="Contemplative Reptile" />
         <CardContent>
-          <Typography variant="overline" component="p">
-            {info.category}
-          </Typography>
-          <Typography variant="h6" component="h2">
-            {info.title}
-          </Typography>
-          <Typography variant="caption" color="textSecondary" component="p">
+          <Typography variant="overline">{info.category}</Typography>
+          <Typography variant="h6">{info.title}</Typography>
+          <Typography variant="caption" color="textSecondary">
             {info.author}
           </Typography>
-          <Typography gutterBottom variant="caption" color="textSecondary" component="p">
+          <Typography gutterBottom variant="caption" color="textSecondary">
             {new Date(info.date).toISOString().slice(0, 10)}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="textSecondary">
             {info.body}
           </Typography>
         </CardContent>
