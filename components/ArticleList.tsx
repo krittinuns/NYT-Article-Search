@@ -17,17 +17,14 @@ const ArticleList = (): JSX.Element => {
     const fetchArticles = async (): Promise<void> => {
       setIsloading(true)
       try {
-        const response = await axios.get(
-          'https://api.nytimes.com/svc/search/v2/articlesearch.json',
-          {
-            params: {
-              page: 0,
-              q: search.term,
-              sort: search.sort,
-              'api-key': 'o1j8YD4Pu90wLjZHrpkGIsXj0QAACJEb', // TODO : get from env
-            },
-          }
-        )
+        const response = await axios.get(process.env.NEXT_PUBLIC_NYT_SEARCH_URL, {
+          params: {
+            page: 0,
+            q: search.term,
+            sort: search.sort,
+            'api-key': process.env.NEXT_PUBLIC_NYT_API_KEY,
+          },
+        })
         setArticles(response.data.response.docs)
         setIsloading(false)
       } catch (error) {

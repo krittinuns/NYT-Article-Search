@@ -14,11 +14,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let article: ArticlePageProps
 
   try {
-    const response = await axios.get('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
+    const response = await axios.get(process.env.NEXT_PUBLIC_NYT_SEARCH_URL, {
       params: {
         page: 0,
         fq: `_id:"nyt://article/${articleId}"`,
-        'api-key': 'o1j8YD4Pu90wLjZHrpkGIsXj0QAACJEb', // TODO : get from env
+        'api-key': process.env.NEXT_PUBLIC_NYT_API_KEY,
       },
     })
 
