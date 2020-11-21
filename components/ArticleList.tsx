@@ -61,12 +61,13 @@ const ArticleList = (): JSX.Element => {
 
   return (
     <Grid container justify="center" spacing={2}>
-      {articles.map((item) => {
+      {articles.map((item, index) => {
         const imageUrl = item.multimedia.length > 0 ? item.multimedia[0].url : 'none'
 
         return (
           <Grid key={item._id} item>
             <ArticleCard
+              index={index}
               web_url={item.web_url}
               imageUrl={`${process.env.NEXT_PUBLIC_NYT_IMAGE_PATH}/${imageUrl}`}
               title={item.headline.main}

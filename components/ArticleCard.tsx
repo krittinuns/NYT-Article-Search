@@ -20,6 +20,7 @@ const useStyles = makeStyles({
 })
 
 type CardInfo = {
+  index: number
   web_url: string
   imageUrl: string
   title: string
@@ -34,7 +35,7 @@ const ArticleCard = (info: CardInfo): JSX.Element => {
   const router = useRouter()
 
   return (
-    <Fade in timeout={500}>
+    <Fade in timeout={500 + info.index * 200}>
       <CardActionArea
         onClick={(e) => {
           e.preventDefault()
