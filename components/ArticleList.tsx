@@ -27,6 +27,7 @@ const ArticleList = (): JSX.Element => {
             page: page.page - 1,
             q: search.term,
             sort: search.sort,
+            fl: 'web_url,headline,byline,multimedia,pub_date,news_desk,abstract,_id',
             'api-key': process.env.NEXT_PUBLIC_NYT_API_KEY,
           },
         })

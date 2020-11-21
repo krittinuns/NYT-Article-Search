@@ -35,7 +35,7 @@ const ArticleCard = (info: CardInfo): JSX.Element => {
   const router = useRouter()
 
   return (
-    <Fade in timeout={500 + info.index * 200}>
+    <Fade in timeout={500 + info.index * 100}>
       <CardActionArea
         onClick={(e) => {
           e.preventDefault()
@@ -53,10 +53,10 @@ const ArticleCard = (info: CardInfo): JSX.Element => {
             <Typography variant="caption" color="textSecondary">
               {info.author}
             </Typography>
-            <Typography gutterBottom variant="caption" color="textSecondary">
+            <Typography gutterBottom variant="caption" color="textSecondary" component="p">
               {new Date(info.date).toISOString().slice(0, 10)}
             </Typography>
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant="body2" color="textSecondary" component="p">
               {info.body}
             </Typography>
           </CardContent>

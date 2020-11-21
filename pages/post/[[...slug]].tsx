@@ -140,6 +140,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       params: {
         page: 0,
         fq: `web_url:"${searchWebUrl}"`,
+        fl: 'web_url,headline,byline,multimedia,pub_date,news_desk,abstract,lead_paragraph',
         'api-key': process.env.NEXT_PUBLIC_NYT_API_KEY,
       },
     })
