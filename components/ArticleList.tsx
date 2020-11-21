@@ -56,7 +56,7 @@ const ArticleList = (): JSX.Element => {
         return (
           <Grid key={item._id} item>
             <ArticleCard
-              id={item._id}
+              web_url={item.web_url}
               imageUrl={`${process.env.NEXT_PUBLIC_NYT_IMAGE_PATH}/${imageUrl}`}
               title={item.headline.main}
               body={item.abstract}

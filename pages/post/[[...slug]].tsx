@@ -131,14 +131,15 @@ const ArticlePage: NextPage<ArticlePageProps> = ({
 
 // data fetching
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const articleId = context.params.id as string
+  const slug = context.params.slug as string[]
+  const searchWebUrl = `${process.env.NEXT_PUBLIC_NYT_WEB_URL}/${slug.join('/')}.html`
   let article: ArticlePageProps
 
   try {
     const response = await axios.get(process.env.NEXT_PUBLIC_NYT_SEARCH_URL, {
       params: {
         page: 0,
-        fq: `_id:"nyt://article/${articleId}"`,
+        fq: `web_url:"${searchWebUrl}"`,
         'api-key': process.env.NEXT_PUBLIC_NYT_API_KEY,
       },
     })

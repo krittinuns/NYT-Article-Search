@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 })
 
 type CardInfo = {
-  id: string
+  web_url: string
   imageUrl: string
   title: string
   body: string
@@ -35,8 +35,10 @@ const ArticleCard = (info: CardInfo): JSX.Element => {
     <CardActionArea
       onClick={(e) => {
         e.preventDefault()
-        const slug = info.id.split('/').pop()
-        router.push(`/article/${slug}`)
+        const slug = info.web_url
+          .replace(`${process.env.NEXT_PUBLIC_NYT_WEB_URL}/`, '')
+          .replace('.html', '')
+        router.push(`/post/${slug}`)
       }}
     >
       <Card className={classes.root}>
