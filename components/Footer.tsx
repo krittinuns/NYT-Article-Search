@@ -1,15 +1,22 @@
 import styles from '../styles/Footer.module.css'
+import Typography from '@material-ui/core/Typography'
+import Link from '@material-ui/core/Link'
 
 const Footer = (): JSX.Element => {
   return (
     <footer className={styles.footer}>
-      <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-      </a>
+      <Typography variant="caption" color="textSecondary" component="p">
+        <Link
+          href="https://github.com/krittinuns/NYT-Article-Search"
+          target="_blank"
+          rel="noopener"
+        >
+          By Krittinun Sirodom
+        </Link>
+      </Typography>
+      <Typography variant="caption" color="textSecondary" component="p">
+        Copyright (c) 2020 The New York Times Company. All Rights Reserved.
+      </Typography>
     </footer>
   )
 }

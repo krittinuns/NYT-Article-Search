@@ -59,8 +59,6 @@ const ArticlePage: NextPage<ArticlePageProps> = ({
 }) => {
   const classes = useStyles()
 
-  console.log(imageUrl)
-
   return (
     <div className={styles.container}>
       <Head>
