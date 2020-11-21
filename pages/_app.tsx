@@ -31,7 +31,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <React.Fragment>
       <Head>
-        <title>Create Next App</title>
+        <title>NYT Article Search</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>

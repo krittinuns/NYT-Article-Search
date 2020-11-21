@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Image from 'next/image'
+import Head from 'next/head'
 import styles from '../../styles/page/DetailPage.module.css'
 import axios from 'axios'
 
@@ -60,6 +61,9 @@ const ArticlePage: NextPage<ArticlePageProps> = ({
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>NYT Article Search : {headline}</title>
+      </Head>
       <main className={styles.main}>
         <Container maxWidth="md">
           <Paper className={classes.paper}>
