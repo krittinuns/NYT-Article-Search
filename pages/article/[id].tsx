@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
 import Link from '@material-ui/core/Link'
 
 import Footer from '../../components/Footer'
@@ -25,6 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     contentBody: {
       padding: `${theme.spacing(2)}px ${theme.spacing(4)}px`,
+    },
+    homeButton: {
+      width: '100%',
+      textAlign: 'center',
+      marginTop: theme.spacing(4),
     },
   })
 )
@@ -98,12 +104,17 @@ const ArticlePage: NextPage<ArticlePageProps> = ({
               color="textSecondary"
               className={classes.content}
               component="p"
-              align="right"
+              align="center"
             >
               <Link href={webUrl} target="_blank" rel="noopener">
                 read more
               </Link>
             </Typography>
+            <Box className={classes.homeButton}>
+              <Button href="/" color="primary" variant="contained" disableElevation>
+                HOME
+              </Button>
+            </Box>
           </Paper>
         </Container>
       </main>

@@ -39,7 +39,7 @@ const ArticleCard = (info: CardInfo): JSX.Element => {
       }}
     >
       <Card className={classes.root}>
-        <CardMedia className={classes.media} image={info.imageUrl} title="Contemplative Reptile" />
+        <CardMedia className={classes.media} image={info.imageUrl} title={info.title} />
         <CardContent>
           <Typography variant="overline">{info.category}</Typography>
           <Typography variant="h6">{info.title}</Typography>
