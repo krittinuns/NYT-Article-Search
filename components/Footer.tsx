@@ -15,7 +15,7 @@ const Footer = (): JSX.Element => {
         </Link>
       </Typography>
       <Typography variant="caption" color="textSecondary" component="p">
-        Content : Copyright (c) 2020 The New York Times Company. All Rights Reserved.
+        Copyright (c) 2020 The New York Times Company. All Rights Reserved.
       </Typography>
     </footer>
   )

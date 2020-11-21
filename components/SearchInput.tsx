@@ -40,6 +40,7 @@ const SearchInput = (): JSX.Element => {
 
   const clearSearch = (): void => {
     setSearch({ term: '', sort: 'newest' })
+    setPage({ page: 1, totalPage: 0 })
     setSearchInputValue('')
   }
 
@@ -48,7 +49,7 @@ const SearchInput = (): JSX.Element => {
       setSearch({ ...search, term: searchInputValue })
       setPage({ page: 1, totalPage: 0 })
 
-      // Due to limitation of the API, if query if empty string, only newest sorting would be applied
+      // Due to API limitations, if query string empty, only newest sorting could be applied
       // Disable the sorting option for better UX
       if (searchInputValue === '') {
         clearSearch()
