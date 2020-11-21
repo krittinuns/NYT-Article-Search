@@ -59,6 +59,8 @@ const ArticlePage: NextPage<ArticlePageProps> = ({
 }) => {
   const classes = useStyles()
 
+  console.log(imageUrl)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -73,14 +75,16 @@ const ArticlePage: NextPage<ArticlePageProps> = ({
             <Typography variant="h6" gutterBottom color="textSecondary" className={classes.content}>
               {abstract}
             </Typography>
-            <Box className={classes.image}>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_NYT_IMAGE_PATH}/${imageUrl}`}
-                width={600}
-                height={400}
-                layout="responsive"
-              />
-            </Box>
+            {imageUrl && (
+              <Box className={classes.image}>
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_NYT_IMAGE_PATH}/${imageUrl}`}
+                  width={600}
+                  height={400}
+                  layout="responsive"
+                />
+              </Box>
+            )}
             <Typography
               variant="overline"
               color="textSecondary"
@@ -143,7 +147,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     if (response.data.response.docs.length > 0) {
       const data = response.data.response.docs[0]
-      const imageUrl = data.multimedia.length > 0 ? data.multimedia[0].url : 'none'
+      const imageUrl = data.multimedia.length > 0 ? data.multimedia[0].url : null
       article = {
         headline: data.headline.main,
         abstract: data.abstract,

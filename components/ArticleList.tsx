@@ -51,7 +51,7 @@ const ArticleList = (): JSX.Element => {
   return (
     <Grid container justify="center" spacing={2}>
       {articles.map((item) => {
-        const imageUrl = item.multimedia.length > 0 ? item.multimedia[0].url : 'none' // TODO : placeholder image
+        const imageUrl = item.multimedia.length > 0 ? item.multimedia[0].url : 'none'
 
         return (
           <Grid key={item._id} item>
