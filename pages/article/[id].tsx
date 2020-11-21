@@ -1,11 +1,46 @@
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import { GetServerSideProps, NextPage } from 'next'
+import axios from 'axios'
 
-const ArticlePage: NextPage = () => {
-  const router = useRouter()
-  const { id } = router.query
+type ArticlePageProps = {
+  leadParagraph: string
+}
 
-  return <p>Article: {id}</p>
+const ArticlePage: NextPage<ArticlePageProps> = (prop) => {
+  return <p>{prop.leadParagraph}</p>
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const articleId = context.params.id as string
+  let article: ArticlePageProps
+
+  try {
+    const response = await axios.get('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
+      params: {
+        page: 0,
+        fq: `_id:"nyt://article/${articleId}"`,
+        'api-key': 'o1j8YD4Pu90wLjZHrpkGIsXj0QAACJEb', // TODO : get from env
+      },
+    })
+
+    if (response.data.response.docs.length > 0) {
+      const data = response.data.response.docs[0]
+      article = {
+        leadParagraph: data.lead_paragraph,
+      }
+    }
+  } catch (error) {
+    console.error(error)
+  }
+
+  if (!article) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: article,
+  }
 }
 
 export default ArticlePage
