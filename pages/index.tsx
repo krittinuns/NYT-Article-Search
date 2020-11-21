@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import SearchInput from '../components/SearchInput'
 import ArticleList from '../components/ArticleList'
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -25,4 +25,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default HomePage

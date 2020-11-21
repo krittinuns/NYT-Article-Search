@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -27,9 +28,16 @@ type CardInfo = {
 
 const ArticleCard = (info: CardInfo): JSX.Element => {
   const classes = useStyles()
+  const router = useRouter()
 
   return (
-    <CardActionArea>
+    <CardActionArea
+      onClick={(e) => {
+        e.preventDefault()
+        const slug = info.id.split('/').pop()
+        router.push(`/article/${slug}`)
+      }}
+    >
       <Card className={classes.root}>
         <CardMedia className={classes.media} image={info.imageUrl} title="Contemplative Reptile" />
         <CardContent>
