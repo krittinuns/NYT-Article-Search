@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { searchState } from '../store'
+import { searchState, pageState } from '../store'
+
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import InputBase from '@material-ui/core/InputBase'
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchInput = (): JSX.Element => {
   const [search, setSearch] = useRecoilState(searchState)
+  const [, setPage] = useRecoilState(pageState)
   const [searchInputValue, setSearchInputValue] = useState('')
   const classes = useStyles()
 
@@ -44,6 +46,7 @@ const SearchInput = (): JSX.Element => {
   const submitSearch = (): void => {
     if (search.term !== searchInputValue) {
       setSearch({ ...search, term: searchInputValue })
+      setPage({ page: 1, totalPage: 0 })
 
       // Due to limitation of the API, if query if empty string, only newest sorting would be applied
       // Disable the sorting option for better UX
@@ -62,7 +65,7 @@ const SearchInput = (): JSX.Element => {
       <InputBase
         className={classes.input}
         value={searchInputValue}
-        placeholder="Search New York Times Articles"
+        placeholder="Search"
         inputProps={{ 'aria-label': 'search New York Times articles' }}
         onChange={(ev) => {
           setSearchInputValue(ev.target.value)

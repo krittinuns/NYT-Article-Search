@@ -1,1 +1,1 @@
-export { searchState } from './atom'
+export { searchState, pageState } from './atom'

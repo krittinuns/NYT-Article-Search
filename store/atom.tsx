@@ -7,3 +7,11 @@ export const searchState = atom({
     sort: 'newest',
   },
 })
+
+export const pageState = atom({
+  key: 'pageState',
+  default: {
+    page: 1,
+    totalPage: 0,
+  },
+})

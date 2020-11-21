@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useRecoilValue } from 'recoil'
-import { searchState } from '../store'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { searchState, pageState } from '../store'
 
 import Grid from '@material-ui/core/Grid'
 import ArticleCard from './ArticleCard'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
 
+// NYT's article search API limitations
+const ARTICLE_PER_PAGE = 10
+const MAX_ARTICLE_PAGE = 200
+
 const ArticleList = (): JSX.Element => {
   const [articles, setArticles] = useState([])
   const [loading, setIsloading] = useState(false)
   const search = useRecoilValue(searchState)
+  const [page, setPage] = useRecoilState(pageState)
 
   useEffect(() => {
     const fetchArticles = async (): Promise<void> => {
@@ -19,12 +24,18 @@ const ArticleList = (): JSX.Element => {
       try {
         const response = await axios.get(process.env.NEXT_PUBLIC_NYT_SEARCH_URL, {
           params: {
-            page: 0,
+            page: page.page - 1,
             q: search.term,
             sort: search.sort,
             'api-key': process.env.NEXT_PUBLIC_NYT_API_KEY,
           },
         })
+
+        const totalPage = Math.min(
+          Math.max(Math.ceil(response.data.response.meta.hits / ARTICLE_PER_PAGE), 0),
+          MAX_ARTICLE_PAGE
+        )
+        setPage({ ...page, totalPage })
         setArticles(response.data.response.docs)
         setIsloading(false)
       } catch (error) {
@@ -34,7 +45,7 @@ const ArticleList = (): JSX.Element => {
     }
 
     fetchArticles()
-  }, [search])
+  }, [page.page, search])
 
   if (loading) {
     return <CircularProgress />
