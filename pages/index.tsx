@@ -5,6 +5,7 @@ import SearchInput from '../components/SearchInput'
 import ArticlePagination from '../components/ArticlePagination'
 import ArticleList from '../components/ArticleList'
 import Footer from '../components/Footer'
+import ScrollTopButton from '../components/ScrollTopButton'
 
 const HomePage: NextPage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage: NextPage = () => {
         <ArticleList />
       </main>
       <Footer />
+      <ScrollTopButton />
     </div>
   )
 }

@@ -38,7 +38,7 @@ const ArticleCard = (info: CardInfo): JSX.Element => {
         const slug = info.web_url
           .replace(`${process.env.NEXT_PUBLIC_NYT_WEB_URL}/`, '')
           .replace('.html', '')
-        router.push(`/post/${slug}`)
+        router.push(`/post/${slug}`).then(() => window.scrollTo(0, 0))
       }}
     >
       <Card className={classes.root}>

@@ -61,7 +61,7 @@ const SearchInput = (): JSX.Element => {
   }
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root} id="search">
       <InputBase
         className={classes.input}
         value={searchInputValue}
